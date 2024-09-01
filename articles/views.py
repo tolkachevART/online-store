@@ -1,8 +1,9 @@
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy
 from django.urls.base import reverse
 from django.utils.text import slugify
-from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView, DetailView, DeleteView
+
 from articles.models import Article
 
 
@@ -25,7 +26,6 @@ class ArticleUpdateView(UpdateView):
     success_url = reverse_lazy('articles:list')
 
     def get_success_url(self):
-
         return self.object.get_absolute_url()
 
 

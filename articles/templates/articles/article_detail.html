@@ -9,7 +9,9 @@
                     <h4 class="my-0 font-weight-normal">{{ object.title }}</h4>
                 </div>
                 <div class="card-body">
-                    <img class="card-img-top" src="{{ object.photo | media_filter }}">
+                    {% if object.picture %}
+                    <img class="card-img-top" src="{{ object.photo | media_filter }}" alt="фывфыв">
+                    {% endif %}
                     <p class="text-start">{{ object.description }}</p>
                     <a class="btn btn-primary" href="{% url 'articles:list'%}" role="button">Назад</a>
                 </div>
