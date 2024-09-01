@@ -1,5 +1,6 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from django.urls import path
 
 from articles.apps import ArticlesConfig
 from articles.views import ArticleCreateView, ArticleUpdateView, ArticleListView, ArticleDetailView, ArticleDeleteView, \
@@ -15,3 +16,5 @@ urlpatterns = [
     path("delete/<int:pk>/", ArticleDeleteView.as_view(), name="delete"),
     path("activity/<int:pk>/", article_is_publication, name="article_is_publication"),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

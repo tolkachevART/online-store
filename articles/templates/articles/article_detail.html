@@ -13,6 +13,9 @@
                     <p class="text-start">{{ object.description }}</p>
                     <a class="btn btn-primary" href="{% url 'articles:list'%}" role="button">Назад</a>
                 </div>
+                <div class="card-footer">
+                    Просмотры {{ object.count_views }}
+                </div>
             </div>
         </div>
     </div>

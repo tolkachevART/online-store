@@ -25,7 +25,7 @@ class ArticleUpdateView(UpdateView):
     success_url = reverse_lazy('articles:list')
 
     def get_success_url(self):
-        # return reverse('articles:view', args=[self.object.pk])
+
         return self.object.get_absolute_url()
 
 

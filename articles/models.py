@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 
+NULLABLE = {"blank": True, "null": True}
+
 
 class Article(models.Model):
     title = models.CharField(
@@ -20,7 +22,7 @@ class Article(models.Model):
         null=True,
     )
     photo = models.ImageField(
-        upload_to="articles/article/photo",
+        upload_to="article/photo",
         blank=True,
         null=True,
         verbose_name="Фото",
