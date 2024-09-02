@@ -6,12 +6,11 @@
         <div class="col-10">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
+                    <img class="card-img-top" src="/{{ object.photo | media_filter }}" alt="фывфыв">
                     <h4 class="my-0 font-weight-normal">{{ object.title }}</h4>
                 </div>
                 <div class="card-body">
-                    {% if object.picture %}
-                    <img class="card-img-top" src="{{ object.photo | media_filter }}" alt="фывфыв">
-                    {% endif %}
+
                     <p class="text-start">{{ object.description }}</p>
                     <a class="btn btn-primary" href="{% url 'articles:list'%}" role="button">Назад</a>
                 </div>
