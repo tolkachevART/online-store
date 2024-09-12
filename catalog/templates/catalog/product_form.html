@@ -1,22 +1,36 @@
 {% extends 'catalog/base.html' %}
-
+{% load my_tags %}
 {% block content %}
-<div class="container mt-1">
-    <h1>{% if object %}Редактировать товар{% else %}Добавление товара{% endif %}</h1>
-    <h1 class="mb-3"></h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {% if not object %}
-        <button type="submit" class="btn btn-success">Добавить</button>
-        <a class="btn btn-primary" href="{% url 'catalog:product_list' %}"
-           role="button">Назад</a>
+<form method="post" enctype="multipart/form-data">
+    <div class="row text-center">
+        <div class="col-6">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                    {% csrf_token %}
+                    {{ form.as_p}}
+                    {{ formset.management_form }}
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    {{ formset.non_form_errors }}
+                    {{ formset.management_form }}
+                    {% for form in formset.forms %}
+                    {{ form.as_p}}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">
+        {% if object %}
+        сохранить
         {% else %}
-        <button type="submit" class="btn btn-success">Редактировать</button>
-        <a class="btn btn-primary" href="{% url 'catalog:product_list' %}"
-           role="button">Назад</a>
+        Создать
         {% endif %}
-    </form>
-    {% endblock %}
-    {% block product_actions %}
-    {% endblock %}
+    </button>
+</form>
+
+{% endblock %}

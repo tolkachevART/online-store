@@ -9,7 +9,6 @@
                     <img src="/{{ product.image | media_filter }}">
                     <div class="card-body">
                         <p class="card-text">{{ object.name }}</p>
-                        <p class="card-text">{{ object.description|truncatechars:100 }}</p>
                         <p class="card-text">Категория: {{ object.category }}</p>
                         <p class="card-text">Цена: {{ object.price }}</p>
                         <p class="card-text">Описание: {{ object.description|truncatechars:100 }}</p>
