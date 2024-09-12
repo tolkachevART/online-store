@@ -1,14 +1,31 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from django.forms import BaseInlineFormSet, ModelForm
+from django.forms import BaseInlineFormSet, BooleanField
 
 from catalog.models import Product, Version
 
-FORBIDDEN_WORDS = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно',
-                   'обман', 'полиция', 'радар']
+
+class StyleFormMixin:
+    """
+    Класс для стилизации форм.
+    Используется для добавления CSS классов к полям форм.
+    """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for fild_name, fild in self.fields.items():
+            if isinstance(fild, BooleanField):
+                fild.widget.attrs['class'] = 'form-check-input'
+            else:
+                fild.widget.attrs['class'] = 'form-control'
 
 
-class ProductForm(forms.ModelForm):
+class ProductForm(StyleFormMixin, forms.ModelForm):
+    """
+    Класс формы для продуктов.
+    Включает проверку на запрещенные слова в названии и описании продукта.
+    """
+
     class Meta:
         model = Product
         fields = "__all__"
@@ -18,15 +35,14 @@ class ProductForm(forms.ModelForm):
         name = cleaned_data.get('name').lower()
         description = cleaned_data.get('description').lower()
 
+        FORBIDDEN_WORDS = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно',
+                           'обман', 'полиция', 'радар']
+
         for word in FORBIDDEN_WORDS:
             if word in name or word in description:
                 raise forms.ValidationError(f'Слово "{word}" запрещено')
 
         return cleaned_data
-
-
-class StyleFormMixin:
-    pass
 
 
 class VersionForm(StyleFormMixin, forms.ModelForm):
