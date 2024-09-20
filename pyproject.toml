@@ -7,13 +7,13 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-django = "^5.1"
 psycopg2 = "^2.9.9"
 black = "^24.8.0"
 pillow = "^10.4.0"
 ipython = "^8.26.0"
 django-phonenumber-field = {extras = ["phonenumbers"], version = "^8.0.0"}
 phonenumbers = "^8.13.45"
+django = "4.2.2"
 
 
 [build-system]
