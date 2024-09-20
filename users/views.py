@@ -15,7 +15,7 @@ from users.models import User
 class UserCreateView(CreateView):
     model = User
     form_class = UserRegisterForm
-    success_url = reverse_lazy('users:login')
+    success_url = reverse_lazy("users:login")
 
     def form_valid(self, form):
         user = form.save()
@@ -24,12 +24,12 @@ class UserCreateView(CreateView):
         user.token = token
         user.save()
         host = self.request.get_host()
-        url = f'http://{host}/users/email-confirm/{token}/'
+        url = f"http://{host}/users/email-confirm/{token}/"
         send_mail(
             subject="Подтверждение почты",
             message=f"Здравствуй! Перейди по ссылке для подтверждения почты {url}",
             from_email=EMAIL_HOST_USER,
-            recipient_list=[user.email]
+            recipient_list=[user.email],
         )
         return super().form_valid(form)
 
@@ -55,8 +55,8 @@ class NewPasswordView(PasswordResetView):
                 subject="Новый пароль",
                 message=f"Здравствуй! Новый пароль для входа в твой аккаунт: {password}",
                 from_email=EMAIL_HOST_USER,
-                recipient_list=[user.email]
+                recipient_list=[user.email],
             )
             user.set_password(password)
             user.save()
-            return redirect(reverse('users:login'))
+            return redirect(reverse("users:login"))
