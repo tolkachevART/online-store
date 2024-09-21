@@ -1,4 +1,5 @@
 {% extends 'catalog/base.html' %}
+
 {% block content %}
 <div class="container">
     <form class="row justify-content-center" method="post" enctype="multipart/form-data">
@@ -13,7 +14,11 @@
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-warning">
-                        Зарегистрироваться
+                        {% if action == 'register' %}
+                            Зарегистрироваться
+                        {% else %}
+                            Редактировать
+                        {% endif %}
                     </button>
                 </div>
             </div>
@@ -21,5 +26,6 @@
     </form>
 </div>
 {% endblock %}
+
 {% block product_actions %}
 {% endblock %}
