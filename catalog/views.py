@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView, CreateView, TemplateView,
 
 from catalog.forms import ProductForm, VersionForm, BaseVersionInlineFormSet, ProductModeratorForm
 from catalog.models import Product, Version
+from catalog.services import get_categories_cache
 
 
 class HomeView(ListView):
@@ -27,6 +28,11 @@ class ProductListView(ListView):
         for product in products:
             product.current_version = Version.objects.filter(product=product, is_current=True).first()
         return products
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category_list'] = get_categories_cache()
+        return context
 
 
 class ProductDetailView(DetailView):
