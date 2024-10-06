@@ -15,6 +15,7 @@ django-phonenumber-field = {extras = ["phonenumbers"], version = "^8.0.0"}
 phonenumbers = "^8.13.45"
 django = "4.2.2"
 redis = "^5.1.1"
+python-dotenv = "^1.0.1"
 
 
 [build-system]
